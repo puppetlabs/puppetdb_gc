@@ -1,3 +1,14 @@
+
+# How to use
+
+Make sure you disable gc-interval on all of your PuppetDB nodes.  In PE you do that by setting this hiera key.
+
+```
+puppet_enterprise::profile::puppetdb::gc_interval: 0
+```
+
+Then simply `include pe_puppetdb_gc` to get the cron jobs instead.  
+
 # What you get
 
 ```
