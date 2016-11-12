@@ -1,21 +1,26 @@
 class pe_puppetdb_gc (
+  Enum['absent', 'present'] $puppetdb_gc_cron_ensure = 'present',
 ) {
 
   pe_puppetdb_gc::gc_cron { 'expire_nodes' :
-    cron_minute => 1,
+    gc_cron_ensure => $puppetdb_gc_cron_ensure,
+    cron_minute    => 1,
   }
 
   pe_puppetdb_gc::gc_cron { 'purge_nodes' :
-    cron_minute => 5,
+    gc_cron_ensure => $puppetdb_gc_cron_ensure,
+    cron_minute    => 5,
   }
 
   pe_puppetdb_gc::gc_cron { 'purge_reports' :
-    cron_minute => [15,45],
+    gc_cron_ensure => $puppetdb_gc_cron_ensure,
+    cron_minute    => [15,45],
   }
 
   pe_puppetdb_gc::gc_cron { 'other' :
-    cron_minute => 55,
-    cron_day    => 20,
+    gc_cron_ensure => $puppetdb_gc_cron_ensure,
+    cron_minute    => 55,
+    cron_day       => 20,
   }
 
 }
