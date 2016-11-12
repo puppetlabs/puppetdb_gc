@@ -1,8 +1,8 @@
-<%- | String        $puppetdb_host,
-      Integer       $puppetdb_port,
-      String        $api_command,
-      Integer       $api_version,
-      Array[String] $api_payload,
+<%- | String  $puppetdb_host,
+      Integer $puppetdb_port,
+      String  $api_command,
+      Integer $api_version,
+      String  $api_payload,
 | -%>
 
-curl -X POST http://<%= $puppetdb_host %>:<%= $puppetdb_port %>/pdb/admin/v1/cmd -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"command": "<%= $api_command %>", "version": <%= $api_version %>, "payload": <%= $api_payload %>}'
+curl -X POST http://<%= $puppetdb_host %>:<%= $puppetdb_port %>/pdb/admin/v1/cmd -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"command": "<%= $api_command %>", "version": <%= $api_version %>, "payload": ["<%= $api_payload %>"] }'

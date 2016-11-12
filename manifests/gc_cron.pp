@@ -3,7 +3,7 @@ define pe_puppetdb_gc::gc_cron (
   Integer       $puppetdb_port = 8080,
   String        $api_command   = 'clean',
   Integer       $api_version   = 1,
-  Array[String] $api_payload,
+  String        $api_payload,
   Optional[Variant[Integer, Array[Integer]]] $cron_minute = undef,
   Optional[Variant[Integer, Array[Integer]]] $cron_hour   = undef,
   Optional[Variant[Integer, Array[Integer]]] $cron_day    = undef,
