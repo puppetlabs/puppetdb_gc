@@ -29,8 +29,7 @@ class puppetdb_gc (
 
     puppetdb_gc::gc_cron { $gc_api_payload :
       gc_cron_ensure => $puppetdb_gc_cron_ensure,
-      cron_minute    => $schedule['minute'],
-      cron_day       => $schedule['monthday'],
+      cron_schedule  => $schedule,
     }
   }
 }

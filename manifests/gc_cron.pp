@@ -5,9 +5,7 @@ define puppetdb_gc::gc_cron (
   String                    $api_command    = 'clean',
   Integer                   $api_version    = 1,
   String                    $api_payload    = $title,
-  Optional[Variant[Integer, Array[Integer]]] $cron_minute = undef,
-  Optional[Variant[Integer, Array[Integer]]] $cron_hour   = undef,
-  Optional[Variant[Integer, Array[Integer]]] $cron_day    = undef,
+  Hash                      $cron_schedule,
 )
 {
 
@@ -21,9 +19,7 @@ define puppetdb_gc::gc_cron (
                       api_payload   => $api_payload,
                     } ),
       user     => 'root',
-      minute   => $cron_minute,
-      hour     => $cron_hour,
-      monthday => $cron_day,
+      *        => $cron_schedule,
     }
 
 }
