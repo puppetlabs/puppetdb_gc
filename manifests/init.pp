@@ -1,6 +1,6 @@
 class puppetdb_gc (
   Enum['absent', 'present'] $puppetdb_gc_cron_ensure     = 'present',
-  Array[Hash]               $gc_api_payload_and_schedule =
+  Array[Puppetdb_gc::Gc_api_payload_and_schedule] $gc_api_payload_and_schedule =
   [
     {
       'gc_api_payload' => 'expire_nodes',
