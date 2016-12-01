@@ -20,6 +20,7 @@ class puppetdb_gc (
   puppetdb_gc::gc_cron { 'other' :
     gc_cron_ensure => $puppetdb_gc_cron_ensure,
     cron_minute    => 55,
+    cron_hour      => 0,
     cron_day       => 20,
   }
 

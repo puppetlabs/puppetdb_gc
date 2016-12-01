@@ -31,7 +31,7 @@ crontab -l -u root
 # Puppet Name: puppet_db_gc_purge_reports
 15,45 * * * * curl -X POST http://127.0.0.1:8080/pdb/admin/v1/cmd -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"command": "clean", "version": 1, "payload": ["purge_reports"] }'
 # Puppet Name: puppet_db_gc_other
-55 * 20 * * curl -X POST http://127.0.0.1:8080/pdb/admin/v1/cmd -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"command": "clean", "version": 1, "payload": ["other"] }'
+55 0 20 * * curl -X POST http://127.0.0.1:8080/pdb/admin/v1/cmd -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"command": "clean", "version": 1, "payload": ["other"] }'
 ```
 
 ## PuppetDB GC Admin API Docs
