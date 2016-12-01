@@ -1,6 +1,6 @@
 {
   "name": "npwalker/puppetdb_gc",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "author": "npwalker",
   "summary": "A Module for managing your PuppetDB Garbage Collection",
   "license": "Apache-2.0",
