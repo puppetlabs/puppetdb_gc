@@ -1,4 +1,5 @@
-<%- | String  $puppetdb_host,
+<%- | Boolean $use_ssl,
+      String  $puppetdb_host,
       Integer $puppetdb_port,
       String  $api_command,
       Integer $api_version,
@@ -7,7 +8,11 @@
 | -%>
 
 <%
-  $curl_command = "curl -X POST https://${puppetdb_host}:${puppetdb_port}/pdb/admin/v1/cmd -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{\"command\": \"${api_command}\", \"version\": ${api_version}, \"payload\": [\"${api_payload}\"] }'"
+  $prefix = $use_ssl ? {
+    true =>  'https',
+    false => 'http',
+  }
+  $curl_command = "curl -X POST ${prefix}://${puppetdb_host}:${puppetdb_port}/pdb/admin/v1/cmd -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{\"command\": \"${api_command}\", \"version\": ${api_version}, \"payload\": [\"${api_payload}\"] }'"
 
   $cert_path = "/etc/puppetlabs/puppet/ssl/certs/${::clientcert}.pem"
   $privatekey_path = "/etc/puppetlabs/puppet/ssl/private_keys/${::clientcert}.pem"
