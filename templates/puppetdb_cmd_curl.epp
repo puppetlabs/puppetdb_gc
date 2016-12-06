@@ -5,4 +5,9 @@
       String  $api_payload,
 | -%>
 
-curl -X POST http://<%= $puppetdb_host %>:<%= $puppetdb_port %>/pdb/admin/v1/cmd -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"command": "<%= $api_command %>", "version": <%= $api_version %>, "payload": ["<%= $api_payload %>"] }'
+<%
+  $curl_command = "curl -X POST http://${puppetdb_host}:${puppetdb_port}/pdb/admin/v1/cmd -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{\"command\": \"${api_command}\", \"version\": ${api_version}, \"payload\": [\"${api_payload}\"] }'"
+  $curl_certs   = "--cert /etc/puppetlabs/puppet/ssl/certs/${::clientcert}.pem --key /etc/puppetlabs/puppet/ssl/private_keys/${::clientcert}.pem --cacert /etc/puppetlabs/puppet/ssl/certs/ca.pem"
+-%>
+
+<%= $curl_command %>
