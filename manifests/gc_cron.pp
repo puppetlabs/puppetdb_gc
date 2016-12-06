@@ -1,7 +1,7 @@
 define puppetdb_gc::gc_cron (
   Enum['absent', 'present'] $gc_cron_ensure = 'present',
-  String                    $puppetdb_host  = '127.0.0.1',
-  Integer                   $puppetdb_port  = 8080,
+  String                    $puppetdb_host  = $fqdn,
+  Integer                   $puppetdb_port  = 8081,
   String                    $api_command    = 'clean',
   Integer                   $api_version    = 1,
   String                    $api_payload    = $title,
