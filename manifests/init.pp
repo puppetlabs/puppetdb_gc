@@ -1,24 +1,28 @@
 class puppetdb_gc (
   Enum['absent', 'present'] $puppetdb_gc_cron_ensure = 'present',
+  String                    $puppetdb_host           = $fqdn,
+  Integer                   $puppetdb_port           = 8081,
 ) {
 
-  puppetdb_gc::gc_cron { 'expire_nodes' :
+  Puppetdb_gc::Gc_cron {
     gc_cron_ensure => $puppetdb_gc_cron_ensure,
+    puppetdb_host  => $puppetdb_host,
+    puppetdb_port  => $puppetdb_port,
+  }
+
+  puppetdb_gc::gc_cron { 'expire_nodes' :
     cron_minute    => 3,
   }
 
   puppetdb_gc::gc_cron { 'purge_nodes' :
-    gc_cron_ensure => $puppetdb_gc_cron_ensure,
     cron_minute    => 5,
   }
 
   puppetdb_gc::gc_cron { 'purge_reports' :
-    gc_cron_ensure => $puppetdb_gc_cron_ensure,
     cron_minute    => [0,15,30,45],
   }
 
   puppetdb_gc::gc_cron { 'other' :
-    gc_cron_ensure => $puppetdb_gc_cron_ensure,
     cron_minute    => 55,
     cron_hour      => 0,
     cron_day       => 20,
