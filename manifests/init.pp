@@ -2,12 +2,14 @@ class puppetdb_gc (
   Enum['absent', 'present'] $puppetdb_gc_cron_ensure = 'present',
   String                    $puppetdb_host           = $fqdn,
   Integer                   $puppetdb_port           = 8081,
+  String                    $postgresql_host         = $puppetdb_host,
 ) {
 
   Puppetdb_gc::Gc_cron {
-    gc_cron_ensure => $puppetdb_gc_cron_ensure,
-    puppetdb_host  => $puppetdb_host,
-    puppetdb_port  => $puppetdb_port,
+    gc_cron_ensure  => $puppetdb_gc_cron_ensure,
+    puppetdb_host   => $puppetdb_host,
+    puppetdb_port   => $puppetdb_port,
+    postgresql_host => $postgresql_host
   }
 
   puppetdb_gc::gc_cron { 'expire_nodes' :
