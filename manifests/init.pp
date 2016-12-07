@@ -10,6 +10,12 @@ class puppetdb_gc (
                                                          false => 8080,
                                                        },
   String                    $postgresql_host         = $puppetdb_host,
+  Hash                      $expire_nodes_schedule   = { 'minute' => 3 },
+  Hash                      $purge_nodes_schedule    = { 'minute' => 5 },
+  Hash                      $purge_reports_schedule  = { 'minute' => [0,15,30,45] },
+  Hash                      $other_schedule          = { 'minute'   => 55,
+                                                         'hour'     => 0,
+                                                         'monthday' => 20, },
 ) {
 
   Puppetdb_gc::Gc_cron {
@@ -21,21 +27,19 @@ class puppetdb_gc (
   }
 
   puppetdb_gc::gc_cron { 'expire_nodes' :
-    cron_minute    => 3,
+    schedule => $expire_nodes_schedule,
   }
 
   puppetdb_gc::gc_cron { 'purge_nodes' :
-    cron_minute    => 5,
+    schedule => $purge_nodes_schedule,
   }
 
   puppetdb_gc::gc_cron { 'purge_reports' :
-    cron_minute    => [0,15,30,45],
+    schedule => $purge_reports_schedule,
   }
 
   puppetdb_gc::gc_cron { 'other' :
-    cron_minute    => 55,
-    cron_hour      => 0,
-    cron_day       => 20,
+    schedule => $other_schedule,
   }
 
 }
