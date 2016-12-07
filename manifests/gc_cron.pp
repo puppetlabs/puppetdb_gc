@@ -12,7 +12,7 @@ define puppetdb_gc::gc_cron (
   String                    $api_command    = 'clean',
   Integer                   $api_version    = 1,
   String                    $api_payload    = $title,
-  Hash                      $schedule,
+  Puppetdb_gc::Cron_schedule $schedule,
   String                    $postgresql_host = $puppetdb_host,
 )
 {
