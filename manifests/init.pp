@@ -38,4 +38,12 @@ class puppetdb_gc (
     cron_day       => 20,
   }
 
+  #this is GC for a PE only feature
+  if versioncmp( pick( $facts['pe_server_version'], '0.0.0'), '2017.2.0' ) >= 0 {
+    puppetdb_gc::gc_cron { 'gc_packages' :
+      cron_minute    => 50,
+      cron_hour      => 0,
+      cron_day       => 10,
+    }
+  }
 }
