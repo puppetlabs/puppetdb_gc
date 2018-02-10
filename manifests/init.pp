@@ -10,6 +10,7 @@ class puppetdb_gc (
                                                          false => 8080,
                                                        },
   String                    $postgresql_host         = $puppetdb_host,
+  Boolean                   $vacuum_reports          = false,
 ) {
 
   Puppetdb_gc::Gc_cron {
@@ -30,6 +31,7 @@ class puppetdb_gc (
 
   puppetdb_gc::gc_cron { 'purge_reports' :
     cron_minute    => [0,15,30,45],
+    vacuum_reports => $vacuum_reports,
   }
 
   puppetdb_gc::gc_cron { 'other' :

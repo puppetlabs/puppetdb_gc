@@ -5,6 +5,7 @@
       Integer $api_version,
       String  $api_payload,
       String  $postgresql_host,
+      Boolean $vacuum_reports,
 | -%>
 
 <%
@@ -20,12 +21,14 @@
 
   $curl_certs   = "--cert ${cert_path} --key ${privatekey_path} --cacert ${cacert_path}"
 
-  #psql gives an error if the privatekey isn't 600 or more secure so we just flip it to get psql to run and set it back
-  $chmod_600 = "chmod 600 ${privatekey_path}"
-  $vacuum_command = "/opt/puppetlabs/server/bin/psql 'user=pe-puppetdb sslcert=${cert_path}  sslkey=${privatekey_path} sslrootcert=${cacert_path} sslmode=verify-ca' -h ${postgresql_host} -c 'VACUUM VERBOSE reports'"
-  $chmod_640 = "chmod 640 ${privatekey_path}"
+  if $vacuum_reports {
+    #psql gives an error if the privatekey isn't 600 or more secure so we just flip it to get psql to run and set it back
+    $chmod_600 = "chmod 600 ${privatekey_path}"
+    $vacuum_command = "/opt/puppetlabs/server/bin/psql 'user=pe-puppetdb sslcert=${cert_path}  sslkey=${privatekey_path} sslrootcert=${cacert_path} sslmode=verify-ca' -h ${postgresql_host} -c 'VACUUM VERBOSE reports'"
+    $chmod_640 = "chmod 640 ${privatekey_path}"
+  }
 
-  if $api_payload == 'purge_reports' {
+  if $api_payload == 'purge_reports' and $vacuum_reports {
     $final_output = "${curl_command} ${curl_certs}; ${chmod_600}; ${vacuum_command}; ${chmod_640}"
   } else {
     $final_output = "${curl_command} ${curl_certs}"

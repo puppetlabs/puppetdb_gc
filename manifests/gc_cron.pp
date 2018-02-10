@@ -16,6 +16,7 @@ define puppetdb_gc::gc_cron (
   Optional[Variant[Integer, Array[Integer]]] $cron_hour   = undef,
   Optional[Variant[Integer, Array[Integer]]] $cron_day    = undef,
   String                    $postgresql_host = $puppetdb_host,
+  Boolean                   $vacuum_reports  = false,
 )
 {
 
@@ -29,7 +30,7 @@ define puppetdb_gc::gc_cron (
                       api_version   => $api_version,
                       api_payload   => $api_payload,
                       postgresql_host => $postgresql_host,
-
+                      vacuum_reports => $vacuum_reports,
                     } ),
       user     => 'root',
       minute   => $cron_minute,
