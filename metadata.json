@@ -1,5 +1,5 @@
 {
-  "name": "npwalker/puppetdb_gc",
+  "name": "npwalker-puppetdb_gc",
   "version": "0.13.0",
   "author": "npwalker",
   "summary": "A Module for managing your PuppetDB Garbage Collection",
@@ -7,7 +7,9 @@
   "source": "https://github.com/npwalker/puppetdb_gc",
   "project_page": "https://github.com/npwalker/puppetdb_gc",
   "issues_url": "https://github.com/npwalker/puppetdb_gc/issues",
-  "dependencies": [],
+  "dependencies": [
+
+  ],
   "operatingsystem_support": [
     {
       "operatingsystem": "RedHat",
@@ -59,8 +61,11 @@
   ],
   "requirements": [
     {
-      "name": "pe",
-      "version_requirement": ">= 2016.4.0"
+      "name": "puppet",
+      "version_requirement": ">= 5.5.0"
     }
-  ]
+  ],
+  "pdk-version": "1.11.0.pre (heads/master-0-g0d864af)",
+  "template-url": "https://github.com/puppetlabs/pdk-templates#master",
+  "template-ref": "heads/master-0-gf48a422"
 }
