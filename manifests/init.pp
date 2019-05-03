@@ -1,3 +1,9 @@
+# @summary A short summary of the purpose of this class
+#
+# A description of what this class does
+#
+# @example
+#   include puppetdb_gc
 class puppetdb_gc (
   Enum['absent', 'present'] $puppetdb_gc_cron_ensure = 'present',
   Boolean                   $use_ssl                 = true,

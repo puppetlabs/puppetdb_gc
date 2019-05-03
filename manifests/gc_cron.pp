@@ -1,3 +1,9 @@
+# @summary A short summary of the purpose of this defined type.
+#
+# A description of what this defined type does
+#
+# @example
+#   puppetdb_gc::gc_cron { 'namevar': }
 define puppetdb_gc::gc_cron (
   Enum['absent', 'present'] $gc_cron_ensure = 'present',
   Boolean                   $use_ssl        = true,
