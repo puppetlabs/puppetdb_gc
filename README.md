@@ -34,6 +34,10 @@ crontab -l -u root
 55 0 20 * * curl -X POST http://127.0.0.1:8080/pdb/admin/v1/cmd -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"command": "clean", "version": 1, "payload": ["other"] }'
 ```
 
+## Using puppetdb_gc with PE HA 
+
+If you setup PE HA you should include puppetdb_gc on both the primary and the replica.  This is because PuppetDB Sync does not sync deletions so GC needs to be performed on both the primary and the replica.  
+
 ## PuppetDB GC Admin API Docs
 
 https://docs.puppet.com/puppetdb/latest/api/admin/v1/cmd.html#post-pdbadminv1cmd
