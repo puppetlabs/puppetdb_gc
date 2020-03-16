@@ -13,26 +13,26 @@
     true =>  'https',
     false => 'http',
   }
-  $curl_command = "curl -X POST ${prefix}://${puppetdb_host}:${puppetdb_port}/pdb/admin/v1/cmd -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{\"command\": \"${api_command}\", \"version\": ${api_version}, \"payload\": [\"${api_payload}\"] }'"
 
-  $cert_path = "/etc/puppetlabs/puppet/ssl/certs/${::clientcert}.pem"
+  $curl_command    = "curl -X POST ${prefix}://${puppetdb_host}:${puppetdb_port}/pdb/admin/v1/cmd -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{\"command\": \"${api_command}\", \"version\": ${api_version}, \"payload\": [\"${api_payload}\"] }'"
+  $cert_path       = "/etc/puppetlabs/puppet/ssl/certs/${::clientcert}.pem"
   $privatekey_path = "/etc/puppetlabs/puppet/ssl/private_keys/${::clientcert}.pem"
-  $cacert_path = "/etc/puppetlabs/puppet/ssl/certs/ca.pem"
-
-  $curl_certs   = "--cert ${cert_path} --key ${privatekey_path} --cacert ${cacert_path}"
+  $cacert_path     = "/etc/puppetlabs/puppet/ssl/certs/ca.pem"
+  $curl_certs      = "--cert ${cert_path} --key ${privatekey_path} --cacert ${cacert_path}"
 
   if $vacuum_reports {
-    #psql gives an error if the privatekey isn't 600 or more secure so we just flip it to get psql to run and set it back
+    # The psql command generates an error if permissions on the private key are not 600 or more secure,
+    # so change permissions, run psql, and revert permissions.
     $chmod_600 = "chmod 600 ${privatekey_path}"
     $vacuum_command = "/opt/puppetlabs/server/bin/psql 'user=pe-puppetdb sslcert=${cert_path}  sslkey=${privatekey_path} sslrootcert=${cacert_path} sslmode=verify-ca' -h ${postgresql_host} -c 'VACUUM VERBOSE reports'"
     $chmod_640 = "chmod 640 ${privatekey_path}"
   }
 
   if $api_payload == 'purge_reports' and $vacuum_reports {
-    $final_output = "${curl_command} ${curl_certs}; ${chmod_600}; ${vacuum_command}; ${chmod_640}"
+    $command_output = "${curl_command} ${curl_certs}; ${chmod_600}; ${vacuum_command}; ${chmod_640}"
   } else {
-    $final_output = "${curl_command} ${curl_certs}"
+    $command_output = "${curl_command} ${curl_certs}"
   }
 -%>
 
-<%= $final_output %>
+<%= $command_output %>
