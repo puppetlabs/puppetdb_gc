@@ -1,8 +1,8 @@
 {
-  "name": "npwalker-puppetdb_gc",
-  "version": "0.13.0",
-  "author": "npwalker",
-  "summary": "A Module for managing your PuppetDB Garbage Collection",
+  "name": "puppetlabs-puppetdb_gc",
+  "version": "1.0.0",
+  "author": "puppetlabs",
+  "summary": "A Module for managing PuppetDB (PostgreSQL data) Garbage Collection",
   "license": "Apache-2.0",
   "source": "https://github.com/npwalker/puppetdb_gc",
   "project_page": "https://github.com/npwalker/puppetdb_gc",
@@ -14,48 +14,49 @@
     {
       "operatingsystem": "RedHat",
       "operatingsystemrelease": [
-        "5",
         "6",
-        "7"
+        "7",
+        "8"
       ]
     },
     {
       "operatingsystem": "CentOS",
       "operatingsystemrelease": [
-        "5",
         "6",
-        "7"
+        "7",
+        "8"
       ]
     },
     {
       "operatingsystem": "OracleLinux",
       "operatingsystemrelease": [
-        "5",
         "6",
-        "7"
+        "7",
+        "8"
       ]
     },
     {
       "operatingsystem": "Scientific",
       "operatingsystemrelease": [
-        "5",
         "6",
-        "7"
+        "7",
+        "8"
       ]
     },
     {
       "operatingsystem": "Debian",
       "operatingsystemrelease": [
         "6",
-        "7"
+        "7",
+        "8"
       ]
     },
     {
       "operatingsystem": "Ubuntu",
       "operatingsystemrelease": [
-        "10.04",
-        "12.04",
-        "14.04"
+        "14.04",
+        "16.04",
+        "18.04"
       ]
     }
   ],

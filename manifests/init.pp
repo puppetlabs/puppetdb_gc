@@ -1,6 +1,6 @@
-# @summary A short summary of the purpose of this class
+# @summary Manage PuppetDB (PostgreSQL data) garbage collection
 #
-# A description of what this class does
+# Manage PuppetDB (PostgreSQL data) garbage collection
 #
 # @example
 #   include puppetdb_gc
@@ -46,8 +46,8 @@ class puppetdb_gc (
     cron_day       => 20,
   }
 
-  #this is GC for a PE only feature
-  if versioncmp( pick( $facts['pe_server_version'], '0.0.0'), '2017.2.0' ) >= 0 {
+  # This data for a feature specific to PE.
+  if versioncmp(pick($facts['pe_server_version'], '0.0.0'), '2017.2.0') >= 0 {
     puppetdb_gc::gc_cron { 'gc_packages' :
       cron_minute    => 50,
       cron_hour      => 0,
