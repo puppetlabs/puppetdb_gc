@@ -1,3 +1,7 @@
+## Minor Release 1.0.1
+
+- Correct lint issues found on the Forge
+
 ## Major Release 1.0.0
 
 - Move from the npwalker namespace to the puppetlabs namespace.
