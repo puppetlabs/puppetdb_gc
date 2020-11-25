@@ -26,12 +26,12 @@ class puppetdb_gc (
   Hash                      $other_cron              =  {
                                                           cron_minute => 55,
                                                           cron_hour   => 0,
-                                                          cron_day    => 20
+                                                          cron_day    => absent
                                                         },
   Hash                     $gc_packages_cron         =  {
                                                           cron_minute => 50,
                                                           cron_hour   => 0,
-                                                          cron_day    => 10
+                                                          cron_day    => absent
                                                         },
 ) {
 
