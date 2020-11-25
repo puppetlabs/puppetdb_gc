@@ -8,7 +8,7 @@ define puppetdb_gc::gc_cron (
   Enum['absent', 'present'] $gc_cron_ensure               = 'present',
   Boolean                   $use_ssl                      = true,
   String                    $puppetdb_host                = $use_ssl ? {
-                                                              true  => $fqdn,
+                                                              true  => $facts['networking']['fqdn'],
                                                               false => '127.0.0.1',
                                                             },
   Integer                   $puppetdb_port                = $use_ssl ? {
@@ -18,9 +18,9 @@ define puppetdb_gc::gc_cron (
   String                    $api_command                  = 'clean',
   Integer                   $api_version                  = 1,
   String                    $api_payload                  = $title,
-  Optional[Variant[Integer, Array[Integer]]] $cron_minute = undef,
-  Optional[Variant[Integer, Array[Integer]]] $cron_hour   = undef,
-  Optional[Variant[Integer, Array[Integer]]] $cron_day    = undef,
+  Optional[Variant[Integer, Array[Integer], Enum['absent']]] $cron_minute = undef,
+  Optional[Variant[Integer, Array[Integer], Enum['absent']]] $cron_hour   = undef,
+  Optional[Variant[Integer, Array[Integer], Enum['absent']]] $cron_day    = undef,
   String                    $postgresql_host              = $puppetdb_host,
   Boolean                   $vacuum_reports               = false,
 )

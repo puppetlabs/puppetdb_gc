@@ -8,7 +8,7 @@ class puppetdb_gc (
   Enum['absent', 'present'] $puppetdb_gc_cron_ensure = 'present',
   Boolean                   $use_ssl                 = true,
   String                    $puppetdb_host           = $use_ssl ? {
-                                                          true  => $fqdn,
+                                                          true  => $facts['networking']['fqdn'],
                                                           false => '127.0.0.1',
                                                         },
   Integer                   $puppetdb_port           = $use_ssl ? {
@@ -17,6 +17,22 @@ class puppetdb_gc (
                                                         },
   String                    $postgresql_host         = $puppetdb_host,
   Boolean                   $vacuum_reports          = false,
+  Hash                      $expire_nodes_cron       = { cron_minute => 3 },
+  Hash                      $purge_nodes_cron        = { cron_minute => 5 },
+  Hash                      $purge_reports_cron      =  {
+                                                          cron_minute    => [0,15,30,45],
+                                                          vacuum_reports => $vacuum_reports
+                                                        },
+  Hash                      $other_cron              =  {
+                                                          cron_minute => 55,
+                                                          cron_hour   => 0,
+                                                          cron_day    => 20
+                                                        },
+  Hash                     $gc_packages_cron         =  {
+                                                          cron_minute => 50,
+                                                          cron_hour   => 0,
+                                                          cron_day    => 10
+                                                        },
 ) {
 
   Puppetdb_gc::Gc_cron {
@@ -28,30 +44,25 @@ class puppetdb_gc (
   }
 
   puppetdb_gc::gc_cron { 'expire_nodes' :
-    cron_minute => 3,
+    * => $expire_nodes_cron,
   }
 
   puppetdb_gc::gc_cron { 'purge_nodes' :
-    cron_minute => 5,
+    * => $purge_nodes_cron,
   }
 
   puppetdb_gc::gc_cron { 'purge_reports' :
-    cron_minute    => [0,15,30,45],
-    vacuum_reports => $vacuum_reports,
+    * => $purge_reports_cron,
   }
 
   puppetdb_gc::gc_cron { 'other' :
-    cron_minute => 55,
-    cron_hour   => 0,
-    cron_day    => 20,
+    * => $other_cron,
   }
 
   # This data for a feature specific to PE.
   if versioncmp(pick($facts['pe_server_version'], '0.0.0'), '2017.2.0') >= 0 {
     puppetdb_gc::gc_cron { 'gc_packages' :
-      cron_minute => 50,
-      cron_hour   => 0,
-      cron_day    => 10,
+      * => $gc_packages_cron,
     }
   }
 }
