@@ -57,6 +57,26 @@ crontab -l -u root
 
 ## Reference
 
+The standard usage of this module is to include the main class which will add all of the GC cron tab entries with the default schedules.
+
+```
+include puppetdb_gc
+```
+
+Additional parameters exist to configure how the module interacts with PuppetDB as well as individual job configuration.
+
+**puppetdb_gc_cron_ensure** Ensure the presence of the GC cron tab entries. Allows for `absent` and `present`. Defaults to `present`
+
+**expire_nodes_cron** Configuration settings for the `expire_nodes` cron tab entry. Allows for a hash of parameters for `puppetdb_gc::gc_cron`. Defaults to `{ cron_minute => 3 }`
+
+**purge_nodes_cron** Configuration settings for the `purge_nodes` cron tab entry. Allows for a hash of parameters for `puppetdb_gc::gc_cron`. Defaults to `{ cron_minute => 5 }`
+
+**purge_reports_cron** Configuration settings for the `purge_reports` cron tab entry. Allows for a hash of parameters for `puppetdb_gc::gc_cron`. Defaults to `{cron_minute => 55,vacuum_reports => false}`
+
+**other_cron** Configuration settings for the `other` cron tab entry. Allows for a hash of parameters for `puppetdb_gc::gc_cron`. Defaults to `{cron_minute => 55,cron_hour => 0,cron_day => absent}`
+
+**gc_packages_cron** Configuration settings for the `gc_packages` cron tab entry. Allows for a hash of parameters for `puppetdb_gc::gc_cron`. Defaults to `{cron_minute => 50,cron_hour => 0,cron_day => absent}`
+
 ### PuppetDB GC Interval
 
 https://puppet.com/docs/puppetdb/latest/configure.html#gc-interval
