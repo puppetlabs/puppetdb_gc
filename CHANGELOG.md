@@ -1,3 +1,9 @@
+## Minor Release 1.1.0
+
+- Update PDK
+- Increase the frequency for other and gc_package cron jobs to daily
+- Add parameters to configure cron job settings
+
 ## Minor Release 1.0.1
 
 - Correct lint issues found on the Forge
