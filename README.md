@@ -9,6 +9,10 @@ Table of Contents
 
 This module provides PuppetDB garbage collection of PostgreSQL data via cron.
 
+> This module is maintained by Puppet, but we have no plans for future feature development. We will keep it working with current versions of Puppet, but new feature development will come from community contributions. It does not qualify for Puppet Support plans.
+>
+> [tier:maintenance-mode]
+
 ## Usage
 
 Disable the internal garbage collection performed by the PuppetDB service via `gc-interval` on all of your PuppetDB nodes.
