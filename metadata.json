@@ -4,9 +4,9 @@
   "author": "puppetlabs",
   "summary": "A Module for managing PuppetDB (PostgreSQL data) Garbage Collection",
   "license": "Apache-2.0",
-  "source": "https://github.com/npwalker/puppetdb_gc",
-  "project_page": "https://github.com/npwalker/puppetdb_gc",
-  "issues_url": "https://github.com/npwalker/puppetdb_gc/issues",
+  "source": "https://github.com/puppetlabs/puppetlabs-puppetdb_gc",
+  "project_page": "https://github.com/puppetlabs/puppetlabs-puppetdb_gc",
+  "issues_url": "https://github.com/puppetlabs/puppetlabs-puppetdb_gc/issues",
   "dependencies": [
 
   ],
